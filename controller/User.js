@@ -43,43 +43,17 @@ exports.createUser = async (req, res) => {
 
 exports.loginUser = async (req, res) => {
   const user = req.user;
+  let id = user.id;
+  let userd = User.findById(id);
+  let data = await userd.populate("projects").exec();
   res
     .cookie("jwt", user.token, {
       expires: new Date(Date.now() + 3600000),
       httpOnly: true,
     })
     .status(201)
-    .json({
-      id: user.id,
-      role: user.role,
-      first_name: user.first_name,
-      last_name: user.last_name,
-      email: user.email,
-      classification: user.classification,
-      projects: user.projects,
-      tickets: user.tickets,
-    });
+    .json(data);
 };
-// exports.loginGuestAdmin = async (req, res) => {
-//   const adminMail = process.env.ADMIN;
-//   const pass = process.env.PASS;
-//   res
-//     .cookie("jwt", user.token, {
-//       expires: new Date(Date.now() + 3600000),
-//       httpOnly: true,
-//     })
-//     .status(201)
-//     .json({
-//       id: user.id,
-//       role: user.role,
-//       first_name: user.first_name,
-//       last_name: user.last_name,
-//       email: user.email,
-//       classification: user.classification,
-//       projects: user.projects,
-//       tickets: user.tickets,
-//     });
-// };
 
 exports.getAllUsers = async (req, res) => {
   let user = User.find({ deleted: { $ne: true } });
