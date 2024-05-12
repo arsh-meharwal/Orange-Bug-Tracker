@@ -69,7 +69,7 @@ exports.fetchAllProjects = async (req, res) => {
 
 exports.fetchProjectById = async (req, res) => {
   const { id } = req.params;
-
+  console.log(id);
   try {
     const project = await Project.findById(id);
     const data = await project.populate("tickets");

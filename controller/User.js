@@ -1,43 +1,85 @@
 const { User } = require("../model/User");
+const crypto = require("crypto");
+const { sanitizeUser } = require("../services/common");
+const SECRET_KEY = process.env.SECRET_KEY;
+const jwt = require("jsonwebtoken");
+const { Project } = require("../model/Project");
 
 exports.createUser = async (req, res) => {
-  const user = new User(req.body);
   try {
-    const doc = await user.save();
-    res
-      .status(201)
-      .json({ id: doc.id, role: doc.role, classification: doc.classification });
-  } catch (err) {
-    res.status(404).json(err);
-    console.log(err);
-  }
-};
+    const salt = crypto.randomBytes(16);
+    crypto.pbkdf2(
+      req.body.password,
+      salt,
+      310000,
+      32,
+      "sha256",
+      async function (err, hashedPassword) {
+        const user = new User({ ...req.body, password: hashedPassword, salt });
+        const doc = await user.save();
 
-exports.loginUser = async (req, res) => {
-  try {
-    const user = await User.findOne({ email: req.body.email }).exec();
-    // TODO: this is just temporary, we will use strong password auth
-    if (!user) {
-      res.status(401).json({ message: "no such user email" });
-    } else if (user.password === req.body.password) {
-      await user.populate("projects");
-      res.status(200).json({
-        id: user.id,
-        role: user.role,
-        first_name: user.first_name,
-        last_name: user.last_name,
-        email: user.email,
-        classification: user.classification,
-        projects: user.projects,
-        tickets: user.tickets,
-      }); //sending user data fields to frontend
-    } else {
-      res.status(401).json({ message: "invalid credentials" });
-    }
+        req.login(sanitizeUser(doc), (err) => {
+          // this also calls serializer and adds to session
+          if (err) {
+            res.status(400).json(err);
+          } else {
+            const token = jwt.sign(sanitizeUser(doc), SECRET_KEY);
+            console.log("Token  - ", token);
+            res
+              .cookie("jwt", token, {
+                expires: new Date(Date.now() + 3600000),
+                httpOnly: true,
+              })
+              .status(201)
+              .json({ id: doc.id, role: doc.role });
+          }
+        });
+      }
+    );
   } catch (err) {
     res.status(400).json(err);
   }
 };
+
+exports.loginUser = async (req, res) => {
+  const user = req.user;
+  res
+    .cookie("jwt", user.token, {
+      expires: new Date(Date.now() + 3600000),
+      httpOnly: true,
+    })
+    .status(201)
+    .json({
+      id: user.id,
+      role: user.role,
+      first_name: user.first_name,
+      last_name: user.last_name,
+      email: user.email,
+      classification: user.classification,
+      projects: user.projects,
+      tickets: user.tickets,
+    });
+};
+// exports.loginGuestAdmin = async (req, res) => {
+//   const adminMail = process.env.ADMIN;
+//   const pass = process.env.PASS;
+//   res
+//     .cookie("jwt", user.token, {
+//       expires: new Date(Date.now() + 3600000),
+//       httpOnly: true,
+//     })
+//     .status(201)
+//     .json({
+//       id: user.id,
+//       role: user.role,
+//       first_name: user.first_name,
+//       last_name: user.last_name,
+//       email: user.email,
+//       classification: user.classification,
+//       projects: user.projects,
+//       tickets: user.tickets,
+//     });
+// };
 
 exports.getAllUsers = async (req, res) => {
   let user = User.find({ deleted: { $ne: true } });
@@ -123,4 +165,43 @@ exports.updateUser = async (req, res) => {
   } catch (err) {
     res.status(500).json({ message: "Internal server error" });
   }
+};
+
+exports.resetPassword = async (req, res) => {
+  const { email, password } = req.body;
+
+  const user = await User.findOne({ email: email });
+  if (user) {
+    const salt = crypto.randomBytes(16);
+    crypto.pbkdf2(
+      password,
+      salt,
+      310000,
+      32,
+      "sha256",
+      async function (err, hashedPassword) {
+        user.password = hashedPassword;
+        user.salt = salt;
+        try {
+          await user.save();
+          res.status(201).json({ message: "password successfully reset" });
+        } catch (error) {
+          res.sendStatus(400);
+        }
+      }
+    );
+  } else {
+    res.sendStatus(400);
+  }
+};
+
+exports.logout = async (req, res) => {
+  res
+    .cookie("jwt", null, {
+      expires: new Date(Date.now()),
+      httpOnly: true,
+    })
+    .sendStatus(200);
+
+  console.log("logout");
 };

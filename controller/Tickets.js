@@ -16,6 +16,17 @@ exports.createTicket = async (req, res) => {
   }
 };
 
+exports.deleteAllClosedTickets = async (req, res) => {
+  try {
+    await Tickets.deleteMany({ status: "Closed" }).exec();
+    res.status(200).json({ message: "Success" });
+    console.log("deletedAllClosedTT");
+  } catch (err) {
+    res.status(500).json({ message: "Internal server error" });
+    console.log(err);
+  }
+};
+
 exports.fetchAllTickets = async (req, res) => {
   // search = {_q="Arsh"}
   // sort = {_sort:"price",_order="desc"}
@@ -75,6 +86,17 @@ exports.fetchTicketById = async (req, res) => {
   }
 };
 
+exports.deleteTicket = async (req, res) => {
+  const { id } = req.params;
+  try {
+    const tt = await Tickets.findByIdAndDelete(id);
+    res.status(200).json({ message: "Success" });
+    console.log("deletedTT");
+  } catch (err) {
+    res.status(500).json({ message: "Internal server error" });
+    console.log(err);
+  }
+};
 exports.updateTicket = async (req, res) => {
   const { id } = req.params;
   try {

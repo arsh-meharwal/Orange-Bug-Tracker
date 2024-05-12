@@ -4,6 +4,8 @@ const {
   fetchAllTickets,
   createTicket,
   updateTicket,
+  deleteTicket,
+  deleteAllClosedTickets,
 } = require("../controller/Tickets");
 
 const router = express.Router();
@@ -12,6 +14,8 @@ router
   .post("/", createTicket)
   .get("/", fetchAllTickets)
   .get("/:id", fetchTicketById)
-  .patch("/:id", updateTicket);
+  .patch("/:id", updateTicket)
+  .delete("/delete/:id", deleteTicket)
+  .delete("/delete", deleteAllClosedTickets);
 
 exports.router = router;
