@@ -1,38 +1,55 @@
 ﻿# Bug Tracker
 
-Bug Tracker is your go-to solution for efficient ticket management, designed to streamline your project workflows and enhance team collaboration. With Bug Tracker, you can effortlessly create, assign, and track tickets across various projects, ensuring nothing falls through the cracks.
+Bug Tracker is your go-to solution for efficient ticket management, designed to streamline your project workflows and enhance team collaboration. With Bug Tracker, you can effortlessly create, assign, and track tickets across various projects, ensuring nothing falls through the cracks. 
+<br> **Frontend Code -** https://github.com/arsh-meharwal/bug-tracker-app-frontend
 
 
 # Key Features:
 
 
-<span style="background-color:yellow">**Priority-based Ticketing:** </span>
+🥇**Priority-based Ticketing:**<br>
 Tickets can be categorized into three priority levels - low, medium, and high - enabling you to prioritize tasks effectively and address urgent issues promptly.
 
-
-Ticket Lifecycle Management: 
-Tickets progress through distinct states, from being assigned to a team member, accepted, in progress, to ultimately completed. This structured workflow ensures clarity and accountability at every stage of ticket resolution. At the end the completed Ticket goes to the initiator for final closure
+<br>
 
 
-Project-based Organization: 
+🥇**Ticket Lifecycle Management:**<br>
+Tickets progress through distinct states, from being Assigned to a team member => Accepted => In Progress => Completed. 
+This structured workflow ensures clarity and accountability at every stage of ticket resolution. At the end the completed Ticket goes to the initiator for final closure
+
+<br>
+
+🥇**Project-based Organization:**<br>
 Tickets are associated with specific projects, which can be either open or closed. When a project is closed, no new tickets are assigned to it, facilitating focused attention on active projects.
 
+<br>
 
-User Roles and Permissions: Ticketify offers granular control over user access with four distinct levels of authorization:
+🥇**User Roles and Permissions:**<br>
+Ticketify offers granular control over user access with four distinct levels of authorization:
 
-Team Member: Assigned tickets and responsible for task execution.
-Project Manager: Oversees project progress, assigns tickets, and manages team members.
-Senior Manager: Provides higher-level oversight and decision-making authority.
-Admin: Administrators with full control over system settings and user permissions.
-Authorization Flexibility: User authorization levels can be adjusted dynamically, empowering members with higher authorization to modify access permissions for those beneath them in the hierarchy.
+🥈  __Team Member:__ Assigned tickets and responsible for task execution.
 
-How Ticketify Works:
-Create Tickets: Easily generate new tickets, specifying priority levels and assigning them to respective team members within the intuitive Ticketify interface.
+🥈  __Project Manager:__ Oversees project progress, assigns tickets, and manages team members.
 
-Track Progress: Monitor the status of tickets as they transition through different stages of completion, ensuring transparency and accountability across the team.
+🥈  __Senior Manager:__ Provides higher-level oversight and decision-making authority.
 
-Efficient Collaboration: Foster seamless collaboration among team members by facilitating clear communication and task allocation within the Ticketify platform.
+🥈  __Admin:__ Administrators with full control over system settings and above authorisations. They have the ability to permanently delete tickets
 
-Optimize Workflow: With customizable workflows and project-based organization, Ticketify helps streamline your operational processes, driving productivity and project success.
+<br>
 
-Experience the power of streamlined ticket management with Ticketify. Sign up now and take your project management to the next level!
+🥇**Authorization Flexibility:**<br> User authorization levels can be adjusted dynamically, empowering members with higher authorization to modify access permissions for those beneath them in the hierarchy.
+
+# How Bug Tracker Works:
+
+
+__Create Tickets:__ Easily generate new tickets, specifying priority levels and assigning them to respective team members within the intuitive Ticketify interface.
+
+__Track Progress:__ Monitor the status of tickets as they transition through different stages of completion, ensuring transparency and accountability across the team.
+
+__Efficient Collaboration:__ Foster seamless collaboration among team members by facilitating clear communication over the task allocation within the platform.
+
+__Optimize Workflow:__ With customizable workflows and project-based organization, Ticketify helps streamline your operational processes, driving productivity and project success.
+
+<br>
+
+**Experience the power of streamlined ticket management with Ticketify. Sign up now and take your project management to the next level!**
