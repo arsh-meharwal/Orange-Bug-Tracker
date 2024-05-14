@@ -6,7 +6,7 @@ Bug Tracker is your go-to solution for efficient ticket management, designed to 
 # Key Features:
 
 
-**Priority-based Ticketing:** 
+<span style="background-color:yellow">H**Priority-based Ticketing:** </span>
 Tickets can be categorized into three priority levels - low, medium, and high - enabling you to prioritize tasks effectively and address urgent issues promptly.
 
 
