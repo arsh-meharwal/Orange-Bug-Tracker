@@ -2,12 +2,21 @@
 
 Bug Tracker is your go-to solution for efficient ticket management, designed to streamline your project workflows and enhance team collaboration. With Bug Tracker, you can effortlessly create, assign, and track tickets across various projects, ensuring nothing falls through the cracks.
 
+
 Key Features:
-Priority-based Ticketing: Tickets can be categorized into three priority levels - low, medium, and high - enabling you to prioritize tasks effectively and address urgent issues promptly.
 
-Ticket Lifecycle Management: Tickets progress through distinct states, from being assigned to a team member, accepted, in progress, to ultimately completed. This structured workflow ensures clarity and accountability at every stage of ticket resolution. At the end the completed Ticket goes to the initiator for final closure
 
-Project-based Organization: Tickets are associated with specific projects, which can be either open or closed. When a project is closed, no new tickets are assigned to it, facilitating focused attention on active projects.
+# Priority-based Ticketing: 
+Tickets can be categorized into three priority levels - low, medium, and high - enabling you to prioritize tasks effectively and address urgent issues promptly.
+
+
+#Ticket Lifecycle Management: 
+Tickets progress through distinct states, from being assigned to a team member, accepted, in progress, to ultimately completed. This structured workflow ensures clarity and accountability at every stage of ticket resolution. At the end the completed Ticket goes to the initiator for final closure
+
+
+#Project-based Organization: 
+Tickets are associated with specific projects, which can be either open or closed. When a project is closed, no new tickets are assigned to it, facilitating focused attention on active projects.
+
 
 User Roles and Permissions: Ticketify offers granular control over user access with four distinct levels of authorization:
 
