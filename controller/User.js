@@ -44,8 +44,9 @@ exports.createUser = async (req, res) => {
 exports.loginUser = async (req, res) => {
   const user = req.user;
   let id = user.id;
-  let userd = User.findById(id);
+  let userd = await User.findById(id);
   let data = await userd.populate("projects").exec();
+  console.log(user.token, "usertoken")
   res
     .cookie("jwt", user.token, {
       expires: new Date(Date.now() + 3600000),
