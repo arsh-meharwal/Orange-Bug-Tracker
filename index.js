@@ -57,8 +57,8 @@ passport.use(
   ) {
     // by default passport uses username
     try {
+      console.log("Locat Starategy");
       const user = await User.findOne({ email: email });
-      console.log("local strat");
       if (!user) {
         return done(null, false, { message: "invalid credentials" }); // for safety
       }
@@ -135,6 +135,6 @@ server.get("/", (req, res) => {
   res.json({ status: "success" });
 });
 
-server.listen(process.env.PORT, () => {
+server.listen(9090, () => {
   console.log("server started");
 });

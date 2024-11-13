@@ -24,7 +24,6 @@ exports.createUser = async (req, res) => {
             res.status(400).json(err);
           } else {
             const token = jwt.sign(sanitizeUser(doc), SECRET_KEY);
-            console.log("Token  - ", token);
             res
               .cookie("jwt", token, {
                 expires: new Date(Date.now() + 3600000),
@@ -43,10 +42,12 @@ exports.createUser = async (req, res) => {
 
 exports.loginUser = async (req, res) => {
   const user = req.user;
+  console.log(user, "usertoken");
   let id = user.id;
   let userd = await User.findById(id);
-  let data = await userd.populate("projects").exec();
-  console.log(user.token, "usertoken")
+  console.log(userd);
+  let data = await userd.populate("projects");
+  console.log(user, "usertoken");
   res
     .cookie("jwt", user.token, {
       expires: new Date(Date.now() + 3600000),
